@@ -11,7 +11,18 @@ connectDB();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public'))
+app.use(express.static('public'));
+
+// Set EJS as templating engine
+
+// Home route
+app.get('/', (req, res) => {
+  res.render('home', { title: 'My App' });
+});
+
+
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 // Routes
 const userRoutes = require('./Routes/UserRoutes');
