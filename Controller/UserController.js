@@ -1,4 +1,4 @@
-
+const Game = require('../database/GameSchema');
 const User = require('../database/UserSchema');
 const jwt = require('jsonwebtoken');
 const { comparePassword } = require('../database/db');
@@ -90,7 +90,17 @@ const login = async (req, res) => {
   }
 };
 
+const getGame = async (req, res) =>{
+  try {
+    const games = await Game.find(); // Fetch all games from MongoDB
+    res.json(games);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching games", error });
+  }
+}
+
 module.exports = {
   signup,
-  login
+  login,
+  getGame
 };
